@@ -25,6 +25,7 @@ alias alias.="vim ~/.bash_profile && resource"
 alias bp.="alias."
 
 
+# git
 
 alias gpu="git pull"
 alias gs="git status"
