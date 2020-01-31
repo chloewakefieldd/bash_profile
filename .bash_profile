@@ -37,12 +37,12 @@ alias gb="git branch"
 alias gch="git checkout"
 alias gcb="gch -b"
 alias gd="git diff"
+c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gp="git push && c"
-alias gco="git commit -m"
+gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gco "wip"; else gco  $COMMIT_MESSAGE; fi ; }
 alias gaa="git add ."
-alias gac="gaa && gco"
-c() { if [ -e .git ]; then gbs; else cl; fi ; }
+# gac() { COMMIT_MESSAGE=$* && if [ -z $COMMIT_MESSAGE ]; then gaa && gco $COMMIT_MESSAGE && c; else gaa && gco "wip" && c ; fi ; }
 
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
 
