@@ -41,8 +41,9 @@ alias gd="git diff"
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gf="git fetch && gbs"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
+alias gl="git log && c"
 alias gp="git push && c"
-gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m \"$COMMIT_MESSAGE\"; fi && c ; }
+gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "\"$COMMIT_MESSAGE"\"; fi && c ; }
 alias gaa="git add . && c"
 gac() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gaa && gco $COMMIT_MESSAGE; else gaa && gco; fi && c ; }
 alias gcoundo="git reset HEAD~ --soft && c"
