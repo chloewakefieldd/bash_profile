@@ -42,7 +42,7 @@ alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gf="git fetch && gbs"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gp="git push && c"
-gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m \"$COMMIT_MESSAGE\"; fi ; }
+gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m \"$COMMIT_MESSAGE\"; fi && c ; }
 alias gaa="git add . && c"
 # gac() { COMMIT_MESSAGE=$* && if [ -z $COMMIT_MESSAGE ]; then gaa && gco $COMMIT_MESSAGE && c; else gaa && gco "wip" && c ; fi ; }
 
