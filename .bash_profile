@@ -40,8 +40,8 @@ alias gd="git diff"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gp="git push && c"
-gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gco "wip"; else gco  $COMMIT_MESSAGE; fi ; }
-alias gaa="git add ."
+gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m \"$COMMIT_MESSAGE\"; fi ; }
+alias gaa="git add . && c"
 # gac() { COMMIT_MESSAGE=$* && if [ -z $COMMIT_MESSAGE ]; then gaa && gco $COMMIT_MESSAGE && c; else gaa && gco "wip" && c ; fi ; }
 
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
