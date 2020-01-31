@@ -17,6 +17,7 @@ alias ll="ls -la"
 # general
 alias resource="source ~/.bash_profile && cl && echo sourced from  ~/.bash_profile"
 alias alias.="vim ~/.bash_profile && resource"
+alias bp.="alias."
 
 # go somewhere
 alias ~="cd ~ && cl"
@@ -36,6 +37,7 @@ alias gs="git status"
 alias gb="git branch"
 alias gch="git checkout"
 alias gcb="gch -b"
+alias gd="git diff"
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gco="git commit -m"
 alias gaa="git add ."
