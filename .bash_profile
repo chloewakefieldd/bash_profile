@@ -25,20 +25,8 @@ alias alias.="vim ~/.bash_profile && resource"
 alias bp.="alias."
 
 
-# go somewhere
-
-alias ~="cd ~ && cl"
-alias desktop="cd ~/desktop && cl"
-alias workspace="cd $WORKSPACE && cl"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd../../../.."
-
-
 # git
 
-alias gc="git clone"
 alias gpu="git pull"
 alias gs="git status"
 alias gb="git branch"
@@ -49,6 +37,7 @@ alias gd="git diff"
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 alias gf="git fetch && gbs"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
+gcl() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
 alias gl="git log && c"
 alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
@@ -58,6 +47,17 @@ alias gcou="git reset HEAD~ --soft && c"
 
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
 
+
+# go somewhere
+
+alias ~="cd ~ && cl && c"
+alias desktop="cd ~/desktop && cl && c"
+alias workspace="cd $WORKSPACE && cl && c"
+alias ..="cd .. && c"
+alias ...="cd ../.. && c"
+alias ....="cd ../../.. && c"
+alias .....="cd../../../.. && c"
+alias ......="cd../../../../.. && c"
 
 
 c
