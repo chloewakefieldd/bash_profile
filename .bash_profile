@@ -46,7 +46,7 @@ alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
 alias gaa="git add . && c"
 gac() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gaa && gco $COMMIT_MESSAGE; else gaa && gco; fi && c ; }
-alias gcoundo="git reset HEAD~ --soft && c"
+alias gcou="git reset HEAD~ --soft && c"
 
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
 
