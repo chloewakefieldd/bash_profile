@@ -1,5 +1,4 @@
-# bash prompt
-# set to path by default
+# bash prompt (set to path by default)
 
 PS1="\w "
 
