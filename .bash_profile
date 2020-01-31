@@ -26,15 +26,14 @@ alias bp.="alias."
 
 
 # git
-
-alias gpu="git pull"
 alias gs="git status"
 alias gb="git branch"
+alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
+c() { if [ -e .git ]; then gbs; else cl; fi ; }
+alias gpu="git pull"
 alias gch="git checkout"
 alias gcb="gch -b"
 alias gd="git diff"
-alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
-c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gf="git fetch && c"
 alias gf="git fetch && c"
 alias gaa="git add . && c"
