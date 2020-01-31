@@ -3,10 +3,14 @@
 
 PS1="\w "
 
+
 # set vars
+
 WORKSPACE=~/workspace
 
+
 # print something
+
 alias cl="clear"
 alias bpcat="cat ~/.bash_profile"
 bpgrep() { STRING=$* && grep $STRING ~/.bash_profile ; }
@@ -14,12 +18,16 @@ nl() { echo ; }
 alias l="ls"
 alias ll="ls -la"
 
+
 # general
+
 alias resource="source ~/.bash_profile && cl && echo sourced from  ~/.bash_profile"
 alias alias.="vim ~/.bash_profile && resource"
 alias bp.="alias."
 
+
 # go somewhere
+
 alias ~="cd ~ && cl"
 alias desktop="cd ~/desktop && cl"
 alias workspace="cd $WORKSPACE && cl"
@@ -27,6 +35,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd../../../.."
+
 
 # git
 
