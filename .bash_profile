@@ -50,8 +50,8 @@ gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_U
 # go somewhere
 
 alias ~="cd ~ && cl && c"
-alias desktop="cd ~/desktop && cl && c"
-alias workspace="cd $WORKSPACE && cl && c"
+alias desktop="cd ~/desktop && cl && c && pwd && nl && l && nl"
+alias workspace="cd $WORKSPACE && cl && c && pwd && nl && l && nl"
 alias ..="cd .. && c"
 alias ...="cd ../.. && c"
 alias ....="cd ../../.. && c"
