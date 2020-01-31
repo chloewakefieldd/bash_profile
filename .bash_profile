@@ -34,11 +34,13 @@ alias gc="git clone"
 alias gpu="git pull"
 alias gs="git status"
 alias gb="git branch"
+alias gf="git fetch && gbs"
 alias gch="git checkout"
 alias gcb="gch -b"
 alias gd="git diff"
-c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
+alias gf="git fetch && gbs"
+c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m \"$COMMIT_MESSAGE\"; fi ; }
 alias gaa="git add . && c"
