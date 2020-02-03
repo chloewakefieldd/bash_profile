@@ -67,4 +67,6 @@ cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 
 export GPG_TTY=$(tty)
 
+
+# finish with clear
 c
