@@ -58,8 +58,8 @@ alias ......="cd../../../../.. && c"
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
 alias alias.="vim ~/.bash_profile && resource"
 alias bp.="alias."
-alias code.="code ."
-alias open.="open ."
+alias code.="code . && c"
+alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 
 c
