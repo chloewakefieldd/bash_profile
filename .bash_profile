@@ -18,13 +18,6 @@ alias l="ls"
 alias ll="ls -la"
 
 
-# general
-
-alias resource="source ~/.bash_profile && cl && echo sourced from  ~/.bash_profile"
-alias alias.="vim ~/.bash_profile && resource"
-alias bp.="alias."
-
-
 # git
 alias gs="git status"
 alias gb="git branch"
@@ -37,7 +30,7 @@ alias gd="git diff"
 alias gf="git fetch && c"
 alias gf="git fetch && c"
 alias gaa="git add . && c"
-gcl() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
+gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
 alias gl="git log && c"
 alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
@@ -59,5 +52,13 @@ alias ....="cd ../../.. && c"
 alias .....="cd../../../.. && c"
 alias ......="cd../../../../.. && c"
 
+
+# general
+
+alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
+alias alias.="vim ~/.bash_profile && resource"
+alias bp.="alias."
+alias code.="code ."
+alias open.="open ."
 
 c
