@@ -56,10 +56,15 @@ alias ......="cd../../../../.. && c"
 # general
 
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
-alias alias.="vim ~/.bash_profile && resource"
+alias alias.="vim ~/.bash_profile && c && resource"
 alias bp.="alias."
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
+
+
+# other
+
+export GPG_TTY=$(tty)
 
 c
