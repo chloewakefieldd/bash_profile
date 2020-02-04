@@ -67,6 +67,7 @@ cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 
 export GPG_TTY=$(tty)
 
+# remote test
 
 # finish with clear
 c
