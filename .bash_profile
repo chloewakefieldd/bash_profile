@@ -28,7 +28,7 @@ alias gch="git checkout"
 alias gcb="gch -b"
 alias gd="git diff"
 alias gf="git fetch && c"
-alias gf="git fetch && c"
+alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
 alias gaa="git add . && c"
 gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
 alias gl="git log && c"
@@ -56,10 +56,17 @@ alias ......="cd../../../../.. && c"
 # general
 
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
-alias alias.="vim ~/.bash_profile && resource"
+alias alias.="vim ~/.bash_profile && c && resource"
 alias bp.="alias."
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 
+
+# other
+
+export GPG_TTY=$(tty)
+
+
+# finish with clear
 c
