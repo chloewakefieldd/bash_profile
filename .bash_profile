@@ -81,6 +81,7 @@ alias alias.c="code ~/.bash_profile"
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
+# demo
 gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY ; }
 
 
