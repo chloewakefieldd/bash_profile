@@ -45,6 +45,10 @@ gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_U
 
 # npm
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
+alias nt="npm run test"
+alias ntu="npm run test:unit"
+alias nti="npm run test:integration"
+alias nte="npm run test:e2e"
 
 # go somewhere
 
