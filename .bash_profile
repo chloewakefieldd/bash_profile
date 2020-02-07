@@ -66,7 +66,17 @@ alias .....="cd../../../.. && c"
 alias ......="cd../../../../.. && c"
 
 
-# go somewhere (iPlayer)
+# general
+
+alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
+alias alias.="vim ~/.bash_profile && c && resource"
+alias bp.="alias."
+alias code.="code . && c"
+alias open.="open . && c"
+cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
+
+
+# iPlayer
 
 alias ipl_atoz="cd. $WORKSPACE/iplayer-web-app-atoz"
 alias ipl_features="cd. $WORKSPACE/iplayer-web-app-features"
@@ -79,15 +89,27 @@ alias ipl_name="cd. $WORKSPACE/iplayer-web-app-name"
 alias ipl_playback="cd. $WORKSPACE/iplayer-web-app-playback-v2"
 alias ipl_styleguide="cd. $WORKSPACE/iplayer-web-app-styleguide"
 
+alias ipl_atoz.="ipl_atoz && open."
+alias ipl_features.="ipl_features && open."
+alias ipl_guide.="ipl_guide && open."
+alias ipl_highlights.="ipl_highlights && open."
+alias ipl_homepage.="ipl_homepage && open."
+alias ipl_lists.="ipl_lists && open."
+alias ipl_programmes.="ipl_programmes && open."
+alias ipl_name.="ipl_name && open."
+alias ipl_playback.="ipl_playback && open."
+alias ipl_styleguide.="ipl_styleguide && open."
 
-# general
-
-alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
-alias alias.="vim ~/.bash_profile && c && resource"
-alias bp.="alias."
-alias code.="code . && c"
-alias open.="open . && c"
-cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
+alias ipl_atoz.c="ipl_atoz && code."
+alias ipl_features.c="ipl_features && code."
+alias ipl_guide.c="ipl_guide && code."
+alias ipl_highlights.c="ipl_highlights && code."
+alias ipl_homepage.c="ipl_homepage && code."
+alias ipl_lists.c="ipl_lists && code."
+alias ipl_programmes.c="ipl_programmes && code."
+alias ipl_name.c="ipl_name && code."
+alias ipl_playback.c="ipl_playback && code."
+alias ipl_styleguide.c="ipl_styleguide && code."
 
 
 # other
