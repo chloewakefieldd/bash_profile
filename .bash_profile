@@ -12,6 +12,7 @@ WORKSPACE=~/workspace
 
 alias cl="clear"
 alias bpcat="cat ~/.bash_profile"
+# demo
 bpgrep() { STRING=$* && grep $STRING ~/.bash_profile ; }
 nl() { echo ; }
 alias l="ls"
@@ -21,8 +22,10 @@ alias ll="ls -la"
 # git
 alias gs="git status"
 alias gb="git branch"
+# demo
 alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
+# demo
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gpu="git pull"
 alias gch="git checkout"
@@ -30,6 +33,7 @@ alias gcb="gch -b"
 alias gd="git diff"
 alias gds="gd --staged"
 alias gf="git fetch && c"
+# demo
 alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
 alias gaa="git add . && c"
 gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
@@ -39,6 +43,7 @@ alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
 gac() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gaa && gco; else gaa && gco $COMMIT_MESSAGE; fi && c ; }
 gacp() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gac; else gac $COMMIT_MESSAGE; fi && cl && FOLDER_NAME=${PWD##*/}/ && echo Pushing $FOLDER_NAME && nl && gp && nl && echo Pushed && c ; }
+# demo
 alias gcou="git reset HEAD~ --soft && c"
 alias gcoundo="gcou"
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
@@ -46,6 +51,7 @@ gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_U
 
 
 # npm
+#demo
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
 alias nt="npm run test"
 alias ntu="npm run test:unit"
