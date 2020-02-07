@@ -75,7 +75,7 @@ alias alias.c="code ~/.bash_profile"
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
-gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY ; }
+gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY && echo completed ; }
 
 
 # iPlayer
