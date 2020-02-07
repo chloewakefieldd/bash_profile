@@ -71,11 +71,11 @@ alias ......="cd../../../../.. && c"
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
 alias alias.="vim ~/.bash_profile && c && resource"
 alias bp.="alias."
-alias gacpbp="CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY"
 alias alias.c="code ~/.bash_profile"
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
+gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY ; }
 
 
 # iPlayer
