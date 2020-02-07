@@ -88,40 +88,63 @@ gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY ; }
 # iPlayer
 
 alias ipl_atoz="cd. $WORKSPACE/iplayer-web-app-atoz"
+alias ipl_boilerplate="cd. $WORKSPACE/iplayer-web-app-boilerplate"
 alias ipl_features="cd. $WORKSPACE/iplayer-web-app-features"
 alias ipl_guide="cd. $WORKSPACE/iplayer-web-app-guide"
 alias ipl_highlights="cd. $WORKSPACE/iplayer-web-app-highlights"
 alias ipl_homepage="cd. $WORKSPACE/iplayer-web-app-homepage"
 alias ipl_lists="cd. $WORKSPACE/iplayer-web-app-lists"
 alias ipl_programmes="cd. $WORKSPACE/iplayer-web-app-myprogrammes"
-alias ipl_name="cd. $WORKSPACE/iplayer-web-app-name"
 alias ipl_playback="cd. $WORKSPACE/iplayer-web-app-playback-v2"
 alias ipl_proxy="cd. $WORKSPACE/iplayer-web-dev-proxy"
 alias ipl_styleguide="cd. $WORKSPACE/iplayer-web-app-styleguide"
+alias ipl_webcomponents="cd. $WORKSPACE/iplayer-web-components"
+alias ipl_storybook="ipl_webcomponents"
 
 alias ipl_atoz.="ipl_atoz && open."
+alias ipl_boilerplate.="ipl_boilerplate && open."
 alias ipl_features.="ipl_features && open."
 alias ipl_guide.="ipl_guide && open."
 alias ipl_highlights.="ipl_highlights && open."
 alias ipl_homepage.="ipl_homepage && open."
 alias ipl_lists.="ipl_lists && open."
 alias ipl_programmes.="ipl_programmes && open."
-alias ipl_name.="ipl_name && open."
 alias ipl_playback.="ipl_playback && open."
 alias ipl_proxy.="ipl_proxy && open."
 alias ipl_styleguide.="ipl_styleguide && open."
+alias ipl_webcomponents.="ipl_webcomponents && open."
+alias ipl_storybook.="ipl_webcomponents."
 
 alias ipl_atoz.c="ipl_atoz && code."
+alias ipl_boilerplate.c="ipl_boilerplate && code."
 alias ipl_features.c="ipl_features && code."
 alias ipl_guide.c="ipl_guide && code."
 alias ipl_highlights.c="ipl_highlights && code."
 alias ipl_homepage.c="ipl_homepage && code."
 alias ipl_lists.c="ipl_lists && code."
 alias ipl_programmes.c="ipl_programmes && code."
-alias ipl_name.c="ipl_name && code."
+alias ipl_playback.c="ipl_playback && code."
 alias ipl_proxy.c="ipl_proxy && code."
 alias ipl_styleguide.c="ipl_styleguide && code."
+alias ipl_webcomponents.c="ipl_webcomponents && code."
+alias ipl_storybook.c="ipl_webcomponents.c"
 
+alias ipl_editproxy="code $WORKSPACE/iplayer-web-dev-proxy/config/local.js"
+alias ipl_setproxy="echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ guideFrontend: \`\${sandbox}:8080\`\\n}\; > file.js"
+
+ipl_atoz.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ atozFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_boilerplate.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ boilerplateFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_features.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ featuresFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_guide.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ guideFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_highlights.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ highlightsFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_homepage.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ homepageFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_lists.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ listsFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_programmes.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ myprogrammesFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_playback.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ playbackFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_webcomponents.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ storybookFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_storybook.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ storybookFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_discoveryservice.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ discoveryService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
+ipl_staticassets.set() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ staticAssetsService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/file.js ; }
 
 # other
 
