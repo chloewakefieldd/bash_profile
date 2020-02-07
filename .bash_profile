@@ -28,6 +28,7 @@ alias gpu="git pull"
 alias gch="git checkout"
 alias gcb="gch -b"
 alias gd="git diff"
+alias gds="gd --staged"
 alias gf="git fetch && c"
 alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
 alias gaa="git add . && c"
@@ -55,12 +56,25 @@ alias nte="npm run test:e2e"
 alias ~="cd ~ && cl && c"
 alias desktop="cd ~/desktop && cl && c && pwd && nl && l && nl"
 alias workspace="cd $WORKSPACE && cl && c && pwd && nl && l && nl"
+alias wp=workspace
 alias ..="cd .. && c"
 alias ...="cd ../.. && c"
 alias ....="cd ../../.. && c"
 alias .....="cd../../../.. && c"
 alias ......="cd../../../../.. && c"
 
+# go somewhere (iPlayer)
+
+alias ipl_atoz="cd. $WORKSPACE/iplayer-web-app-atoz"
+alias ipl_features="cd. $WORKSPACE/iplayer-web-app-features"
+alias ipl_guide="cd. $WORKSPACE/iplayer-web-app-guide"
+alias ipl_highlights="cd. $WORKSPACE/iplayer-web-app-highlights"
+alias ipl_homepage="cd. $WORKSPACE/iplayer-web-app-homepage"
+alias ipl_lists="cd. $WORKSPACE/iplayer-web-app-lists"
+alias ipl_programmes="cd. $WORKSPACE/iplayer-web-app-myprogrammes"
+alias ipl_name="cd. $WORKSPACE/iplayer-web-app-name"
+alias ipl_playback="cd. $WORKSPACE/iplayer-web-app-playback-v2"
+alias ipl_styleguide="cd. $WORKSPACE/iplayer-web-app-styleguide"
 
 # general
 
