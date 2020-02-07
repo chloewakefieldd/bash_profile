@@ -44,12 +44,14 @@ alias gcoundo="gcou"
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
 gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_URL | sed 's/^git@github.com:/https:\/\/github.com\//') && GIT_URL=${GIT_URL%.*} && open $GIT_URL ; }
 
+
 # npm
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
 alias nt="npm run test"
 alias ntu="npm run test:unit"
 alias nti="npm run test:integration"
 alias nte="npm run test:e2e"
+
 
 # go somewhere
 
@@ -62,6 +64,7 @@ alias ...="cd ../.. && c"
 alias ....="cd ../../.. && c"
 alias .....="cd../../../.. && c"
 alias ......="cd../../../../.. && c"
+
 
 # go somewhere (iPlayer)
 
@@ -76,6 +79,7 @@ alias ipl_name="cd. $WORKSPACE/iplayer-web-app-name"
 alias ipl_playback="cd. $WORKSPACE/iplayer-web-app-playback-v2"
 alias ipl_styleguide="cd. $WORKSPACE/iplayer-web-app-styleguide"
 
+
 # general
 
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
@@ -89,6 +93,7 @@ cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 # other
 
 export GPG_TTY=$(tty)
+
 
 # finish with clear
 c
