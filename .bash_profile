@@ -21,7 +21,7 @@ alias ll="ls -la"
 # git
 alias gs="git status"
 alias gb="git branch"
-alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done'
+alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gpu="git pull"
@@ -71,6 +71,7 @@ alias ......="cd../../../../.. && c"
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
 alias alias.="vim ~/.bash_profile && c && resource"
 alias bp.="alias."
+alias alias.c="code ~/.bash_profile"
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
