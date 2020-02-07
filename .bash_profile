@@ -21,6 +21,7 @@ alias ll="ls -la"
 # git
 alias gs="git status"
 alias gb="git branch"
+alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done'
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gpu="git pull"
@@ -42,6 +43,8 @@ alias gcoundo="gcou"
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
 gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_URL | sed 's/^git@github.com:/https:\/\/github.com\//') && GIT_URL=${GIT_URL%.*} && open $GIT_URL ; }
 
+# npm
+alias nrd="npm run debug"
 
 # go somewhere
 
