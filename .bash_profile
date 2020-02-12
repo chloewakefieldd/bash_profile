@@ -22,6 +22,7 @@ alias ll="ls -la"
 # git
 alias gs="git status"
 alias gb="git branch"
+alias gdb="git branch -D"
 # demo
 alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
@@ -33,8 +34,11 @@ alias gcb="gch -b"
 alias gd="git diff"
 alias gds="gd --staged"
 alias gf="git fetch && c"
+
 # demo
+
 alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
+alias gchm="gf && gch master && gpu && gdf && nl && pwd && nl && l && nl && gb && gs && nl"
 alias gaa="git add . && c"
 gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
 alias gcw="cd $WORKSPACE && gc"
@@ -171,3 +175,7 @@ export GPG_TTY=$(tty)
 
 # finish with clear
 c
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
