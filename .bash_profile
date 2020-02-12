@@ -61,7 +61,7 @@ alias nt="npm run test"
 alias ntu="npm run test:unit"
 alias nti="npm run test:integration"
 alias nte="npm run test:e2e"
-
+alias inte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec ./test/e2e/experiments/iplwb_pb29.spec.ts"
 
 # go somewhere
 
