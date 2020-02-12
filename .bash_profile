@@ -50,7 +50,7 @@ gacp() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gac; else gac $C
 # demo
 alias gcou="git reset HEAD~ --soft && c"
 alias gcoundo="gcou"
-alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${PWD##*/} && .. && rm -rf $FOLDER_NAME && c && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL && cd $FOLDER_NAME && c"
+alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${pwd##*/} && cd .. && rm -rf $FOLDER_NAME && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL"
 gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_URL | sed 's/^git@github.com:/https:\/\/github.com\//') && GIT_URL=${GIT_URL%.*} && open $GIT_URL ; }
 
 
