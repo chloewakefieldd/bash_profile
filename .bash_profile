@@ -63,6 +63,7 @@ gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl &
 
 alias ~="cd ~ && cl && c"
 alias desktop="cd ~/desktop && cl && c && pwd && nl && l && nl"
+alias dp="desktop"
 alias workspace="cd $WORKSPACE && cl && c && pwd && nl && l && nl"
 alias wp=workspace
 alias ..="cd .. && c"
