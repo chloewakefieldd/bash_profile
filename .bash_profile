@@ -12,7 +12,6 @@ WORKSPACE=~/workspace
 
 alias cl="clear"
 alias bpcat="cat ~/.bash_profile"
-# demo
 bpgrep() { STRING=$* && grep $STRING ~/.bash_profile ; }
 nl() { echo ; }
 alias l="ls"
@@ -20,13 +19,12 @@ alias ll="ls -la"
 
 
 # git
+
 alias gs="git status"
 alias gb="git branch"
 alias gdb="git branch -D"
-# demo
 alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
-# demo
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gpu="git pull"
 alias gch="git checkout"
@@ -34,9 +32,6 @@ alias gcb="gch -b"
 alias gd="git diff"
 alias gds="gd --staged"
 alias gf="git fetch && c"
-
-# demo
-
 alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
 alias gchm="gf && gch master && gpu && gdf && nl && pwd && nl && l && nl && gb && gs && nl"
 alias gaa="git add . && c"
@@ -47,7 +42,6 @@ alias gp="git push && c"
 gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
 gac() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gaa && gco; else gaa && gco $COMMIT_MESSAGE; fi && c ; }
 gacp() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gac; else gac $COMMIT_MESSAGE; fi && cl && FOLDER_NAME=${PWD##*/}/ && echo Pushing $FOLDER_NAME && nl && gp && nl && echo Pushed && c ; }
-# demo
 alias gcou="git reset HEAD~ --soft && c"
 alias gcoundo="gcou"
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${pwd##*/} && cd .. && rm -rf $FOLDER_NAME && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL"
@@ -55,7 +49,7 @@ gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_U
 
 
 # npm
-#demo
+
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
 alias nt="npm run test"
 alias ntu="npm run test:unit"
@@ -63,6 +57,7 @@ alias nti="npm run test:integration"
 alias nte="npm run test:e2e"
 alias inte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec ./test/e2e/experiments/iplwb_pb29.spec.ts"
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
+
 
 # go somewhere
 
@@ -86,7 +81,6 @@ alias alias.c="code ~/.bash_profile"
 alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
-# demo
 gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && gacp; cd. $CURRENT_DIRECTORY ; }
 
 
@@ -143,7 +137,6 @@ alias ipl_storybook.c="ipl_webcomponents.c"
 alias ipl_editproxy="code $WORKSPACE/iplayer-web-dev-proxy/config/local.js"
 alias ipl_setproxy="echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ guideFrontend: \`\${sandbox}:8080\`\\n}\; > file.js"
 
-
 ipl_atoz_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ atozFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_boilerplate_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ boilerplateFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_features_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ featuresFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
@@ -157,7 +150,6 @@ ipl_webcomponents_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; 
 ipl_storybook_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ storybookFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_discoveryservice_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ discoveryService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_staticassets_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ staticAssetsService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
-
 
 alias ipl_atoz.p="ipl_atoz_setport"
 alias ipl_boilerplate.p="ipl_boilerplate_setport"
@@ -174,15 +166,14 @@ alias ipl_discoveryservice.p="ipl_discoveryservice_setport"
 alias ipl_staticassets.p="ipl_staticassets_setport"
 
 
-
 # other
 
 export GPG_TTY=$(tty)
-
-
-# finish with clear
-c
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# finish with clear
+
+c
