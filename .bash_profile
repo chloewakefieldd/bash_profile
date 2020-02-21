@@ -20,6 +20,7 @@ alias ll="ls -la"
 
 
 # git
+
 alias gs="git status"
 alias gb="git branch"
 alias gdb="git branch -D"
@@ -63,6 +64,7 @@ gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl &
 
 alias ~="cd ~ && cl && c"
 alias desktop="cd ~/desktop && cl && c && pwd && nl && l && nl"
+alias dp="desktop"
 alias workspace="cd $WORKSPACE && cl && c && pwd && nl && l && nl"
 alias wp=workspace
 alias ..="cd .. && c"
@@ -137,7 +139,6 @@ alias ipl_storybook.c="ipl_webcomponents.c"
 alias ipl_editproxy="code $WORKSPACE/iplayer-web-dev-proxy/config/local.js"
 #ipl_rp() { cd $WORKSPACE/iplayer-web-dev-proxy && nrd ; }
 
-
 ipl_atoz_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ atozFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_boilerplate_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ boilerplateFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_features_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ featuresFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
@@ -151,7 +152,6 @@ ipl_webcomponents_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; 
 ipl_storybook_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ storybookFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_discoveryservice_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ discoveryService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_staticassets_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ staticAssetsService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
-
 
 alias ipl_atoz.p="ipl_atoz_setport"
 alias ipl_boilerplate.p="ipl_boilerplate_setport"
@@ -196,8 +196,6 @@ ipl_rp() {
 }
 
 
-
-
 # other
 
 export GPG_TTY=$(tty)
@@ -208,4 +206,5 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # finish with clear
+
 c
