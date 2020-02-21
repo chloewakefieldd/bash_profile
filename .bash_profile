@@ -58,6 +58,7 @@ alias nte="npm run test:e2e"
 alias inte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$chromedriverversion npm run test:e2e -- --spec ./test/e2e/experiments/iplwb_pb29.spec.ts"
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
 
+
 # go somewhere
 
 alias ~="cd ~ && cl && c"
@@ -171,10 +172,10 @@ alias ipl_staticassets.p="ipl_staticassets_setport"
 
 export GPG_TTY=$(tty)
 
-
-# finish with clear
-c
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# finish with clear
+c
