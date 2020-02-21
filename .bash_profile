@@ -135,7 +135,7 @@ alias ipl_webcomponents.c="ipl_webcomponents && code."
 alias ipl_storybook.c="ipl_webcomponents.c"
 
 alias ipl_editproxy="code $WORKSPACE/iplayer-web-dev-proxy/config/local.js"
-ipl_rp() { cd $WORKSPACE/iplayer-web-dev-proxy && nrd ; }
+#ipl_rp() { cd $WORKSPACE/iplayer-web-dev-proxy && nrd ; }
 
 
 ipl_atoz_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ atozFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
@@ -166,6 +166,39 @@ alias ipl_webcomponents.p="ipl_webcomponents_setport"
 alias ipl_storybook.p="ipl_storybook_setport"
 alias ipl_discoveryservice.p="ipl_discoveryservice_setport"
 alias ipl_staticassets.p="ipl_staticassets_setport"
+
+ipl_rp() {
+  app=$1
+  port=$2
+  case $app in
+    atoz )
+      ipl_atoz.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    boilerplate )
+      ipl_boilerplate.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    features )
+      ipl_features.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    guide )
+      ipl_guide.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    highlights )
+      ipl_highlights.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    homepage )
+      ipl_homepage.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    lists )
+      ipl_lists.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    programmes )
+      ipl_programmes.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    playback )
+      ipl_playback.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    webcomponents )
+      ipl_webcomponents.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    storybook )
+      ipl_storybook.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    discoveryservice )
+      ipl_discoveryservice.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    staticassets )
+      ipl_staticassets.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+  esac
+}
 
 
 # other
