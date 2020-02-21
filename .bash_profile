@@ -175,7 +175,7 @@ newtabi(){
     -e "tell application \"iTerm2\" to tell current session of newWindow to write text \"${@}\""
 }
 
-ipl_rp() {
+ipl_run() {
   app=$1
   port=$2
   case $app in
