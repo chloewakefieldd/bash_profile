@@ -153,6 +153,9 @@ ipl_storybook_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\
 ipl_discoveryservice_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ discoveryService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_staticassets_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ staticAssetsService: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 
+ipl_setports() { INPUT=$* && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {$INPUT}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
+
+
 alias ipl_atoz.p="ipl_atoz_setport"
 alias ipl_boilerplate.p="ipl_boilerplate_setport"
 alias ipl_features.p="ipl_features_setport"
@@ -175,6 +178,7 @@ newtabi(){
     -e "tell application \"iTerm2\" to tell current session of newWindow to write text \"${@}\""
 }
 
+
 ipl_run() {
   app=$1
   port=$2
@@ -193,6 +197,95 @@ ipl_run() {
     discoveryservice ) ipl_discoveryservice.p $port && newtabi "ipl_discoveryservice && nrd $port" && ipl_startproxy ;;
     staticassets ) ipl_staticassets.p $port && newtabi "ipl_staticassets && nrd $port" && ipl_startproxy ;;
   esac
+}
+
+
+ipl_test() {
+    cd $WORKSPACE
+    directories=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
+
+    if [[ ( ${#directories} == 0 ) ]]; then
+        echo No directories found in $WORKSPACE;
+    else
+        repo_name=$*
+        while [[ ${#repo_name} == 0 ]]; do
+            cd $WORKSPACE
+            cl && printf "\n\n\nPlease select an app to run:\n\n"
+            select d in */; do test -n "$d" && break; echo ">>> Invalid Selection, please provide a valid number"; done
+            repo_name=${d%%/}
+        done
+    fi
+
+    cl && echo $'\n\n\n'"Repo name: $repo_name"$'\n\n\n\n\n\n'
+}
+
+test() {
+    msg=""
+    options=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
+    options=($options)
+
+    menu() {
+        cl
+        echo "Choose apps to run:"
+        nl
+        for i in ${!options[@]}; do 
+            printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
+        done
+        if [[ "$msg" ]]; then echo "$msg"; fi
+    }
+
+    prompt="Check an option (again to uncheck, ENTER when done): "
+    while menu && nl && read -rp "$prompt" num && [[ "$num" ]]; do
+        [[ "$num" != *[![:digit:]]* ]] &&
+        (( num > 0 && num <= ${#options[@]} )) ||
+        { msg="Invalid option: $num"; continue; }
+        ((num--));
+        [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
+    done
+    nl
+    selected=()
+    for i in ${!options[@]}; do 
+        [[ "${choices[i]}" ]] && { item=$(printf " %s" "${options[i]}") && selected=("${selected[@]}" $item); msg=""; }
+    done
+    nl
+    #ports=()
+    count="0"
+    string=""
+    append=""
+    for app in ${selected[@]}; do
+        nl
+        read -rp "Port for $app: " port
+        #ports=("${ports[@]}" $port)
+        echo START app
+        echo -e $app
+        echo END app
+        case $app in
+            iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append ;;
+            discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append ;;
+            staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append ;;
+        esac
+        if [[ ! -z $count ]]; then
+            count="passed"
+            append=","
+        fi
+        # WILL APPEND COMMAS WRONGLY, DEPENDS ON NUMBER OF SELECTED
+    done
+    string=$string\\n
+    #echo ${ports[@]}
+    echo START string
+    echo -e $string
+    echo END string
+    ipl_setports $string
+    nl
 }
 
 
