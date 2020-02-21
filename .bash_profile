@@ -167,38 +167,35 @@ alias ipl_storybook.p="ipl_storybook_setport"
 alias ipl_discoveryservice.p="ipl_discoveryservice_setport"
 alias ipl_staticassets.p="ipl_staticassets_setport"
 
+alias ipl_startproxy="cd $WORKSPACE/iplayer-web-dev-proxy && nrd"
+
+newtabi(){  
+  osascript \
+    -e 'tell application "iTerm2" to tell current window to set newWindow to (create tab with default profile)'\
+    -e "tell application \"iTerm2\" to tell current session of newWindow to write text \"${@}\""
+}
+
 ipl_rp() {
   app=$1
   port=$2
   case $app in
-    atoz )
-      ipl_atoz.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    boilerplate )
-      ipl_boilerplate.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    features )
-      ipl_features.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    guide )
-      ipl_guide.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    highlights )
-      ipl_highlights.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    homepage )
-      ipl_homepage.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    lists )
-      ipl_lists.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    programmes )
-      ipl_programmes.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    playback )
-      ipl_playback.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    webcomponents )
-      ipl_webcomponents.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    storybook )
-      ipl_storybook.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    discoveryservice )
-      ipl_discoveryservice.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
-    staticassets )
-      ipl_staticassets.p $port && cd $WORKSPACE/iplayer-web-dev-proxy && nrd ;;
+    atoz ) ipl_atoz.p $port && newtabi "ipl_atoz && nrd $port" && ipl_startproxy ;;
+    boilerplate ) ipl_boilerplate.p $port && newtabi "ipl_boilerplate && nrd $port" && ipl_startproxy ;;
+    features ) ipl_features.p $port && newtabi "ipl_features && nrd $port" && ipl_startproxy ;;
+    guide ) ipl_guide.p $port && newtabi "ipl_guide && nrd $port" && ipl_startproxy ;;
+    highlights ) ipl_highlights.p $port && newtabi "ipl_highlights && nrd $port" && ipl_startproxy ;;
+    homepage ) ipl_homepage.p $port && newtabi "ipl_homepage && nrd $port" && ipl_startproxy ;;
+    lists ) ipl_lists.p $port && newtabi "ipl_lists && nrd $port" && ipl_startproxy ;;
+    programmes ) ipl_programmes.p $port && newtabi "ipl_programmes && nrd $port" && ipl_startproxy ;;
+    playback ) ipl_playback.p $port && newtabi "ipl_playback && nrd $port" && ipl_startproxy ;;
+    webcomponents ) ipl_webcomponents.p $port && newtabi "ipl_webcomponents && nrd $port" && ipl_startproxy ;;
+    storybook ) ipl_storybook.p $port && newtabi "ipl_storybook && nrd $port" && ipl_startproxy ;;
+    discoveryservice ) ipl_discoveryservice.p $port && newtabi "ipl_discoveryservice && nrd $port" && ipl_startproxy ;;
+    staticassets ) ipl_staticassets.p $port && newtabi "ipl_staticassets && nrd $port" && ipl_startproxy ;;
   esac
 }
+
+
 
 
 # other
