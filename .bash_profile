@@ -220,6 +220,7 @@ ipl_test() {
 }
 
 test() {
+    wp
     msg=""
     options=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
     options=($options)
