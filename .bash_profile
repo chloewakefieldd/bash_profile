@@ -250,10 +250,23 @@ test() {
     done
     nl
     #ports=()
-    count="0"
     string=""
     append=""
+    index=-1
+    num=0
+    for index in ${!selected[@]}; do
+        num=$index
+    done
+    ((index++))
+    echo index $index
+    if (( $index > 1)); then append=","; fi
+    echo append $append
+    ((index--))
     for app in ${selected[@]}; do
+        if (( $index < 1)); then append=""; fi
+        ((index--))
+        echo indexNew $index 
+        echo appendNew $append
         nl
         read -rp "Port for $app: " port
         #ports=("${ports[@]}" $port)
@@ -274,11 +287,6 @@ test() {
             discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append ;;
             staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append ;;
         esac
-        if [[ ! -z $count ]]; then
-            count="passed"
-            append=","
-        fi
-        # WILL APPEND COMMAS WRONGLY, DEPENDS ON NUMBER OF SELECTED
     done
     string=$string\\n
     #echo ${ports[@]}
