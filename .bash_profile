@@ -257,13 +257,11 @@ test() {
     for index in ${!selected[@]}; do
         num=$index
     done
-    ((index++))
+    ((num++))
     numSelected=$num
     numValidSelected=0
     numDone=0
     validSelected=()
-    
-    if (( $numSelected < 2)); then append=""; else append=","; fi
 
     for app in ${selected[@]}; do
         case $app in
@@ -282,6 +280,9 @@ test() {
         esac
     done
 
+    if (( $numValidSelected < 2)); then append=""; else append=","; fi
+
+    echo BEFORE: numSelected $numSelected
     echo BEFORE: numValidSelected $numValidSelected
     echo BEFORE: numDone $numDone
 
