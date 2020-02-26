@@ -77,6 +77,7 @@ alias ......="cd../../../../.. && c"
 # general
 
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
+alias rs="resource"
 alias alias.="vim ~/.bash_profile && c && resource"
 alias bp.="alias."
 alias alias.c="code ~/.bash_profile"
