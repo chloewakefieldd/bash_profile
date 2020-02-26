@@ -282,14 +282,6 @@ test() {
 
     if (( $numValidSelected < 2)); then append=""; else append=","; fi
 
-    echo BEFORE: numSelected $numSelected
-    echo BEFORE: numValidSelected $numValidSelected
-    echo BEFORE: numDone $numDone
-
-    for app in ${validSelected[@]}; do
-        echo $app
-    done
-
     for app in ${validSelected[@]}; do
         ((numDone++))
         if (( $numValidSelected == $numDone)); then append=""; fi
