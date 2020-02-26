@@ -302,13 +302,7 @@ test() {
             staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append ;;
         esac
     done
-    echo numSelected$numSelected
-    echo numDone$numDone
     string=$string\\n
-    #echo ${ports[@]}
-    echo START string
-    echo -e $string
-    echo END string
     ipl_setports $string
     nl
 }
