@@ -251,21 +251,46 @@ test() {
     nl
     #ports=()
     string=""
-    append=""
     index=-1
     num=0
     for index in ${!selected[@]}; do
         num=$index
     done
     ((index++))
-    echo index $index
-    if (( $index > 1)); then append=","; fi
-    echo append $append
-    ((index--))
+    numSelected=$num
+    numValidSelected=0
+    numDone=0
+    validSelected=()
+    
+    if (( $numSelected < 2)); then append=""; else append=","; fi
+
     for app in ${selected[@]}; do
-        if (( $index < 1)); then append=""; fi
-        ((index--))
-        echo indexNew $index 
+        case $app in
+            iplayer-web-app-atoz ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-boilerplate ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-features ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-guide ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-highlights ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-homepage ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-lists ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-myprogrammes ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-app-playback-v2 ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            iplayer-web-components ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            discoveryservice ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+            staticassets ) ((numValidSelected++)); validSelected=("${validSelected[@]}" $app) ;;
+        esac
+    done
+
+    echo BEFORE: numValidSelected $numValidSelected
+    echo BEFORE: numDone $numDone
+
+    for app in ${validSelected[@]}; do
+        echo $app
+    done
+
+    for app in ${validSelected[@]}; do
+        ((numDone++))
+        if (( $numValidSelected == $numDone)); then append=""; fi
         echo appendNew $append
         nl
         read -rp "Port for $app: " port
@@ -288,6 +313,8 @@ test() {
             staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append ;;
         esac
     done
+    echo numSelected$numSelected
+    echo numDone$numDone
     string=$string\\n
     #echo ${ports[@]}
     echo START string
