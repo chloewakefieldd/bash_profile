@@ -285,13 +285,8 @@ test() {
     for app in ${validSelected[@]}; do
         ((numDone++))
         if (( $numValidSelected == $numDone)); then append=""; fi
-        echo appendNew $append
         nl
         read -rp "Port for $app: " port
-        #ports=("${ports[@]}" $port)
-        echo START app
-        echo -e $app
-        echo END app
         case $app in
             iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append ;;
             iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append ;;
