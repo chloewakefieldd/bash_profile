@@ -307,13 +307,10 @@ ipl_run() {
     nl
 
     for i in ${!validSelected[@]}; do
-        #echo $i
-        #echo ${validSelected[i]} ${ports[i]} 
-        #nl
         ipl_runapp ${validSelected[i]} ${ports[i]} 
     done
 
-    #ipl_startproxy
+    ipl_startproxy
 }
 
 
