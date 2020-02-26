@@ -250,10 +250,7 @@ test() {
         [[ "${choices[i]}" ]] && { item=$(printf " %s" "${options[i]}") && selected=("${selected[@]}" $item); msg=""; }
     done
     nl
-    #ports=()
     string=""
-    index=-1
-    num=0
     for index in ${!selected[@]}; do
         num=$index
     done
