@@ -244,7 +244,6 @@ test() {
         ((num--));
         [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
     done
-    nl
     selected=()
     for i in ${!options[@]}; do 
         [[ "${choices[i]}" ]] && { item=$(printf " %s" "${options[i]}") && selected=("${selected[@]}" $item); msg=""; }
