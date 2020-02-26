@@ -251,6 +251,7 @@ test() {
     done
     nl
     string=""
+    num=0
     for index in ${!selected[@]}; do
         num=$index
     done
