@@ -180,23 +180,23 @@ newtabi(){
 }
 
 
-ipl_run() {
+ipl_runapp() {
   app=$1
   port=$2
   case $app in
-    atoz ) ipl_atoz.p $port && newtabi "ipl_atoz && nrd $port" && ipl_startproxy ;;
-    boilerplate ) ipl_boilerplate.p $port && newtabi "ipl_boilerplate && nrd $port" && ipl_startproxy ;;
-    features ) ipl_features.p $port && newtabi "ipl_features && nrd $port" && ipl_startproxy ;;
-    guide ) ipl_guide.p $port && newtabi "ipl_guide && nrd $port" && ipl_startproxy ;;
-    highlights ) ipl_highlights.p $port && newtabi "ipl_highlights && nrd $port" && ipl_startproxy ;;
-    homepage ) ipl_homepage.p $port && newtabi "ipl_homepage && nrd $port" && ipl_startproxy ;;
-    lists ) ipl_lists.p $port && newtabi "ipl_lists && nrd $port" && ipl_startproxy ;;
-    programmes ) ipl_programmes.p $port && newtabi "ipl_programmes && nrd $port" && ipl_startproxy ;;
-    playback ) ipl_playback.p $port && newtabi "ipl_playback && nrd $port" && ipl_startproxy ;;
-    webcomponents ) ipl_webcomponents.p $port && newtabi "ipl_webcomponents && nrd $port" && ipl_startproxy ;;
-    storybook ) ipl_storybook.p $port && newtabi "ipl_storybook && nrd $port" && ipl_startproxy ;;
-    discoveryservice ) ipl_discoveryservice.p $port && newtabi "ipl_discoveryservice && nrd $port" && ipl_startproxy ;;
-    staticassets ) ipl_staticassets.p $port && newtabi "ipl_staticassets && nrd $port" && ipl_startproxy ;;
+    iplayer-web-app-atoz ) newtabi "ipl_atoz && nrd $port" ;;
+    iplayer-web-app-boilerplate ) newtabi "ipl_boilerplate && nrd $port" ;;
+    iplayer-web-app-features ) newtabi "ipl_features && nrd $port" ;;
+    iplayer-web-app-guide ) newtabi "ipl_guide && nrd $port" ;;
+    iplayer-web-app-highlights ) newtabi "ipl_highlights && nrd $port" ;;
+    iplayer-web-app-homepage ) newtabi "ipl_homepage && nrd $port" ;;
+    iplayer-web-app-lists ) newtabi "ipl_lists && nrd $port" ;;
+    iplayer-web-app-myprogrammes ) newtabi "ipl_programmes && nrd $port" ;;
+    iplayer-web-app-playback-v2 ) newtabi "ipl_playback && nrd $port" ;;
+    iplayer-web-components ) newtabi "ipl_webcomponents && nrd $port" ;;
+    iplayer-web-components ) newtabi "ipl_storybook && nrd $port" ;;
+    discoveryservice ) newtabi "ipl_discoveryservice && nrd $port" ;;
+    staticassets ) newtabi "ipl_staticassets && nrd $port" ;;
   esac
 }
 
@@ -220,7 +220,7 @@ ipl_test() {
     cl && echo $'\n\n\n'"Repo name: $repo_name"$'\n\n\n\n\n\n'
 }
 
-test() {
+ipl_run() {
     wp
     msg=""
     options=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
@@ -279,29 +279,41 @@ test() {
 
     if (( $numValidSelected < 2)); then append=""; else append=","; fi
 
+    ports=()
+
     for app in ${validSelected[@]}; do
         ((numDone++))
         if (( $numValidSelected == $numDone)); then append=""; fi
         nl
         read -rp "Port for $app: " port
         case $app in
-            iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append ;;
-            discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append ;;
-            staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append ;;
+            iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
         esac
     done
+
     string=$string\\n
     ipl_setports $string
     nl
+
+    for i in ${!validSelected[@]}; do
+        #echo $i
+        #echo ${validSelected[i]} ${ports[i]} 
+        #nl
+        ipl_runapp ${validSelected[i]} ${ports[i]} 
+    done
+
+    #ipl_startproxy
 }
 
 
