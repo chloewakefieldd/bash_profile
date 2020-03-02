@@ -281,10 +281,14 @@ ipl_run() {
     if (( $numValidSelected < 2)); then append=""; else append=","; fi
 
     ports=()
+    defaultPorts=( 8080 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090 8091 8092 8093 8094 8095 8096 8097 8098 8099 )
+
+    # read "Use default ports? "
+    # echo $useDefaultPorts
 
     for app in ${validSelected[@]}; do
         ((numDone++))
-        if (( $numValidSelected == $numDone)); then append=""; fi
+        if (( $numValidSelected == $numDone )); then append=""; fi
         nl
         read -rp "Port for $app: " port
         case $app in
