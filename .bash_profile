@@ -69,10 +69,10 @@ nrd() { PORT=$* && PORT=$PORT npm run debug ; }
 alias nt="npm run test"
 alias ntu="npm run test:unit"
 alias nti="npm run test:integration"
-alias nte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$chromedriverversion npm run test:e2e"
-alias ntel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$chromedriverversion npm run test:e2e -- --spec"
-alias ntes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$chromedriverversion npm run test:e2e"
-alias ntels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$chromedriverversion npm run test:e2e -- --spec"
+alias nte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+alias ntel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+alias ntes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+alias ntels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
 
 
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
