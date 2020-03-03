@@ -143,7 +143,6 @@ alias ipl_webcomponents.c="ipl_webcomponents && code."
 alias ipl_storybook.c="ipl_webcomponents.c"
 
 alias ipl_editproxy="code $WORKSPACE/iplayer-web-dev-proxy/config/local.js"
-#ipl_rp() { cd $WORKSPACE/iplayer-web-dev-proxy && nrd ; }
 
 ipl_atoz_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ atozFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
 ipl_boilerplate_setport() { PORT=$* && echo $PORT && echo -e \'use strict\'\; \\n\\nconst sandbox = \'http://sandbox.bbc.co.uk\'\;\\n\\nmodule.exports = {\\n\ \ boilerplateFrontend: \`\${sandbox}:$PORT\`\\n}\; > $WORKSPACE/iplayer-web-dev-proxy/config/local.js ; }
