@@ -40,7 +40,7 @@ gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOL
 alias gcw="cd $WORKSPACE && gc"
 alias gl="git log && c"
 alias gp="git push && c"
-gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && c ; }
+gco() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then git commit -m "wip"; else git commit -m "$COMMIT_MESSAGE"; fi && unset COMMIT_MESSAGE && c ; }
 gac() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gaa && gco; else gaa && gco $COMMIT_MESSAGE; fi && c ; }
 gacp() { COMMIT_MESSAGE=$* && if [[ -z $COMMIT_MESSAGE ]]; then gac; else gac $COMMIT_MESSAGE; fi && cl && FOLDER_NAME=${PWD##*/}/ && echo Pushing $FOLDER_NAME && nl && gp && nl && echo Pushed && c ; }
 alias gcou="git reset HEAD~ --soft && c"
@@ -232,25 +232,31 @@ ipl_run() {
 
     menu() {
         cl
-        echo "Choose apps to run:"
+        echo "You have these apps available to run in your $WORKSPACE folder:"
         nl
         for i in ${!options[@]}; do 
             printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
         done
-        if [[ "$msg" ]]; then echo "$msg"; fi
+        if [[ "$msg" ]]; then echo -e "$msg"; fi
     }
 
-    prompt="Check an option (again to uncheck, ENTER when done): "
-    while menu && nl && read -rp "$prompt" num && [[ "$num" ]]; do
-        [[ "$num" != *[![:digit:]]* ]] &&
-        (( num > 0 && num <= ${#options[@]} )) ||
-        { msg="Invalid option: $num"; continue; }
-        ((num--));
-        [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
-    done
     selected=()
-    for i in ${!options[@]}; do 
-        [[ "${choices[i]}" ]] && { item=$(printf " %s" "${options[i]}") && selected=("${selected[@]}" $item); msg=""; }
+    unset triedGettingAppSelectionAlready
+
+    while (( ${#selected[@]} == 0 )); do
+        [ -z "$triedGettingAppSelectionAlready" ] && appSelectionMessage="" || appSelectionMessage="Select at least one app to run\n"
+        while menu && nl && echo -e $appSelectionMessage && read -rp "Type a number from the list above and press ENTER to select it (again to deselect, ENTER when done): " selectedAppNumber && [[ "$selectedAppNumber" ]]; do
+            [[ "$selectedAppNumber" != *[![:digit:]]* ]] &&
+            (( selectedAppNumber > 0 && selectedAppNumber <= ${#options[@]} )) ||
+            { msg="\nInvalid option: $selectedAppNumber"; continue; }
+            ((selectedAppNumber--));
+            [[ "${choices[selectedAppNumber]}" ]] && choices[selectedAppNumber]="" || choices[selectedAppNumber]="+"
+            echo $selectedAppNumber
+        done
+        triedGettingAppSelectionAlready=true
+        for i in ${!options[@]}; do 
+            [[ "${choices[i]}" ]] && { item=$(printf " %s" "${options[i]}") && selected=("${selected[@]}" $item); msg=""; }
+        done
     done
     nl
     string=""
@@ -286,33 +292,53 @@ ipl_run() {
     ports=()
     defaultPorts=( 8080 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090 8091 8092 8093 8094 8095 8096 8097 8098 8099 )
 
-    # read "Use default ports? "
-    # echo $useDefaultPorts
+    read -rp "Use default ports? (ENTER for yes): " useDefaultPorts
 
-    for app in ${validSelected[@]}; do
-        ((numDone++))
-        if (( $numValidSelected == $numDone )); then append=""; fi
-        nl
-        read -rp "Port for $app: " port
-        case $app in
-            iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-            staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
-        esac
-    done
+    if [[ -z $useDefaultPorts ]]; then
+        for app in ${validSelected[@]}; do
+            port=${defaultPorts[numDone]}
+            ((numDone++))
+            if (( $numValidSelected == $numDone )); then append=""; fi
+            case $app in
+                iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            esac
+        done
+    else
+        for app in ${validSelected[@]}; do
+            ((numDone++))
+            if (( $numValidSelected == $numDone )); then append=""; fi
+            nl
+            read -rp "Port for $app: " port
+            case $app in
+                iplayer-web-app-atoz ) string=$string\\n$(echo -e atozFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-boilerplate ) string=$string\\n$(echo -e boilerplateFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-features ) string=$string\\n$(echo -e featuresFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-guide ) string=$string\\n$(echo -e guideFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-highlights ) string=$string\\n$(echo -e highlightsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-homepage ) string=$string\\n$(echo -e homepageFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-lists ) string=$string\\n$(echo -e listsFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-myprogrammes ) string=$string\\n$(echo -e myprogrammesFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-app-playback-v2 ) string=$string\\n$(echo -e playbackFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                iplayer-web-components ) string=$string\\n$(echo -e storybookFrontend: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                discoveryservice ) string=$string\\n$(echo -e discoveryService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+                staticassets ) string=$string\\n$(echo -e staticAssetsService: \`\${sandbox}:$port\`\\n)$append; ports=("${ports[@]}" $port) ;;
+            esac
+        done
+    fi
 
     string=$string\\n
     ipl_setports $string
-    nl
 
     for i in ${!validSelected[@]}; do
         ipl_runapp ${validSelected[i]} ${ports[i]} 
