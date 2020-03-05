@@ -18,7 +18,7 @@ nl() { echo ; }
 alias l="ls"
 alias ll="ls -la"
 
-
+echo hi0
 # git
 
 alias gs="git status"
@@ -48,6 +48,7 @@ alias gcoundo="gcou"
 alias obliterate!="GIT_URL=$(git config --get remote.origin.url) && FOLDER_NAME=${pwd##*/} && cd .. && rm -rf $FOLDER_NAME && echo Resetting $FOLDER_NAME && nl && gc $GIT_URL"
 gopen() { GIT_URL=$(git config --get remote.origin.url) && GIT_URL=$(echo $GIT_URL | sed 's/^git@github.com:/https:\/\/github.com\//') && GIT_URL=${GIT_URL%.*} && open $GIT_URL ; }
 
+echo hi05
 
 # go somewhere
 
@@ -61,19 +62,30 @@ alias ...="cd ../.. && c"
 alias ....="cd ../../.. && c"
 alias .....="cd../../../.. && c"
 alias ......="cd../../../../.. && c"
+echo hi055
 
 
 # npm
 alias nrb="npm run build"
+echo hi0551
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
+echo hi0552
+
 alias nt="npm run test"
 alias ntu="npm run test:unit"
 alias nti="npm run test:integration"
-alias nte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
-alias ntel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
-alias ntes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
-alias ntels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+echo hi0553
 
+#alias nte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+echo hi05535
+
+#alias ntel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+echo hi0554
+
+#alias ntes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+#alias ntels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+
+echo hi06
 
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
 gcwi() { wp && GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
@@ -90,6 +102,46 @@ alias code.="code . && c"
 alias open.="open . && c"
 cd.() { MY_DIR=$* && cd $MY_DIR && c ; }
 gacpbp() { CURRENT_DIRECTORY=$(pwd) && ~ && git add .bash_profile && gco && gp; cd. $CURRENT_DIRECTORY ; }
+
+echo hi1
+# Run command
+ron() {
+  # Set Location to On Network
+  networksetup -switchtolocation "BBC On Network"
+
+  # Turn off auto-join BBC Staff Wi-Fi
+  networksetup -removepreferredwirelessnetwork en0 "BBC Staff Wi-Fi"
+  networksetup -removepreferredwirelessnetwork en0 Corporate_Wireless_Network
+
+  # Turn on auto-join Corporate_Wireless_Network
+  networksetup -addpreferredwirelessnetworkatindex en0 Corporate_Wireless_Network 0 WPA2E
+
+  # Turn off Wi-Fi
+  networksetup -setairportpower en0 off
+
+  # Turn on Wi-Fi
+  networksetup -setairportpower en0 on
+}
+echo hi2
+
+# Run command
+roff() {
+  # Set Location to On Network
+  networksetup -switchtolocation "BBC Off Network"
+
+  # Turn off auto-join BBC Staff Wi-Fi
+  networksetup -removepreferredwirelessnetwork en0 "BBC Staff Wi-Fi"
+  networksetup -removepreferredwirelessnetwork en0 Corporate_Wireless_Network
+
+  # Turn on auto-join Corporate_Wireless_Network
+  networksetup -addpreferredwirelessnetworkatindex en0 "BBC Staff Wi-Fi" 0 WPA2E
+
+  # Turn off Wi-Fi
+  networksetup -setairportpower en0 off
+
+  # Turn on Wi-Fi
+  networksetup -setairportpower en0 on
+}
 
 
 # iPlayer
