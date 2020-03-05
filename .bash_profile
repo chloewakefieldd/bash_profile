@@ -261,7 +261,7 @@ ipl_test() {
     cl && echo $'\n\n\n'"Repo name: $repo_name"$'\n\n\n\n\n\n'
 }
 
-ipl_run() {
+iplrun() {
     wp
     msg=""
     options=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
