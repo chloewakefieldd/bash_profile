@@ -66,14 +66,14 @@ alias ......="cd../../../../.. && c"
 # npm
 alias nrb="npm run build"
 nrd() { PORT=$* && PORT=$PORT npm run debug ; }
-alias nt="npm run test"
-alias ntu="npm run test:unit"
-alias nti="npm run test:integration"
+alias nrt="npm run test"
+alias nrtu="npm run test:unit"
+alias nrti="npm run test:integration"
 
-alias nte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
-alias ntel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
-alias ntes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
-alias ntels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+alias nrte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e"
+alias nrtel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e -- --spec"
+alias nrtes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e"
+alias nrtels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e -- --spec"
 
 
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
@@ -81,7 +81,6 @@ gcwi() { wp && GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed 
 
 
 # general
-
 alias resource="source ~/.bash_profile && c && echo sourced from  ~/.bash_profile && nl"
 alias rs="resource"
 alias alias.="vim ~/.bash_profile && c && resource"
