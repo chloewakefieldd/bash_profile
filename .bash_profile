@@ -35,6 +35,7 @@ alias gds="gd --staged"
 alias gf="git fetch && c"
 alias gdf="cl && echo Fetching ... && nl && git fetch && nl && echo START origin/master diff && gd origin/master && echo END origin/master diff && nl"
 alias gchm="gf && gch master && gpu && gdf && nl && pwd && nl && l && nl && gb && gs && nl"
+alias grtm="gf && gch origin/master"
 alias gaa="git add . && c"
 gc() { REPO=$* && FOLDER_NAME=$(echo $REPO | sed 's|.*/||') && FOLDER_NAME=${FOLDER_NAME%.*} && git clone $REPO && cd $FOLDER_NAME && c ; }
 alias gcw="cd $WORKSPACE && gc"
@@ -260,7 +261,7 @@ ipl_test() {
     cl && echo $'\n\n\n'"Repo name: $repo_name"$'\n\n\n\n\n\n'
 }
 
-iplrun() {
+iplrunOLD() {
     wp
     msg=""
     options=$(find . -mindepth 1 -maxdepth 1 -type d  \( ! -iname ".*" \) | sed 's|^\./||g')
