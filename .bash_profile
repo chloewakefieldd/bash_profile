@@ -24,7 +24,8 @@ alias ll="ls -la"
 alias gs="git status"
 alias gb="git branch"
 alias gdb="git branch -D"
-alias gbr='REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
+alias gbr='git fetch && REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed '"'"'s/^origin\///'"'"'; done && nl'
+gbrg() { STRING=$* && git fetch && REMOTE_BRANCH_LIST=$(git branch -r) && nl && for word in $REMOTE_BRANCH_LIST; do echo $word | sed 's/^origin\///' | grep $STRING; done; nl ; }
 alias gbs="cl && pwd && nl && l && nl && gb && gs && nl"
 c() { if [ -e .git ]; then gbs; else cl; fi ; }
 alias gpu="git pull"
@@ -71,10 +72,10 @@ alias nrt="npm run test"
 alias nrtu="npm run test:unit"
 alias nrti="npm run test:integration"
 
-alias nrte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e"
-alias nrtel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e -- --spec"
-alias nrtes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e"
-alias nrtels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=${chromedriverversion} npm run test:e2e -- --spec"
+alias nrte="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+alias nrtel="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
+alias nrtes="WEBDRIVER_BASE_URL=https://sandbox.bbc.co.uk WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e"
+alias nrtels="WEBDRIVER_BROWSER=chrome WEBDRIVER_DRIVER_VERSION=$(chromedriverversion) npm run test:e2e -- --spec"
 
 
 gci() { GIT_URL=$* && gc $GIT_URL && npm ci && c && nl && echo Installed && nl && nl ; }
